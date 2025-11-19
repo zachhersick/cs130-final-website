@@ -1,71 +1,136 @@
-body {
-    background: #efefef;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+:root{
+    --bg: #f6f7fb;
+    --card-bg: #ffffff;
+    --primary: #0f62fe;
+    --accent: #7f5af0;
+    --muted: #475569;
+    --muted-2: #64748b;
+    --success: #0f9d58;
+    --radius: 12px;
+    --max-width: 1100px;
 }
 
-#wrapper {
-    width: 900px;
-    background: white;
-    margin: 0 auto;
-    padding: 20px;
+/* Reset & base */
+*{box-sizing: border-box}
+html,body{height:100%}
+body{
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--bg), #eef2ff 120px);
+    color: var(--muted);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.45;
 }
 
-header {
-    margin-bottom: 20px;
+/* Page container */
+#wrapper{
+    max-width:var(--max-width);
+    margin:32px auto;
+    background:var(--card-bg);
+    padding:28px;
+    border-radius:var(--radius);
+    box-shadow:0 10px 30px rgba(16,24,40,0.06);
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+/* Header / nav */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    margin-bottom:22px;
 }
 
-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+.brand{
+    font-weight:700;
+    color:var(--primary);
+    font-size:1.25rem;
+    letter-spacing: -0.2px;
 }
 
-.float-img {
-    float: right;
-    margin: 10px;
+nav ul{display:flex;gap:10px;align-items:center;margin:0;padding:0;list-style:none}
+nav a{
+    display:inline-block;
+    padding:8px 12px;
+    color:var(--muted-2);
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    transition:all 160ms ease;
+}
+nav a:hover, nav a:focus{
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    color:white;
+    transform:translateY(-1px);
+    box-shadow:0 6px 18px rgba(15,98,254,0.12);
 }
 
-.float-img img {
-    width: 220px;
-    border-radius: 8px;
+/* Utility / layout helpers */
+.container{width:100%;margin:0 auto;padding:0 12px}
+.flex{display:flex;gap:16px;align-items:center}
+.stack{display:flex;flex-direction:column;gap:12px}
+.muted{color:var(--muted-2)}
+
+/* Responsive floated image -> modern card image */
+.float-img{float:none;margin:0 0 18px 0;text-align:center}
+.float-img img, .profile img{max-width:100%;height:auto;border-radius:10px;display:block;margin:0 auto}
+
+.profile{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+
+/* Cards and grids for pages */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.95), #fff);padding:16px;border-radius:12px;border:1px solid rgba(15,23,42,0.04);box-shadow:0 6px 18px rgba(16,24,40,0.03)}
+.card h3{margin:0 0 8px 0;color:#0b1220}
+.card p{margin:0;color:var(--muted-2)}
+
+/* Tables (for schedule pages) */
+table{width:100%;border-collapse:collapse;background:transparent}
+th,td{padding:12px 10px;text-align:left;border-bottom:1px solid rgba(15,23,42,0.06);color:var(--muted-2)}
+th{font-weight:700;color:#0b1220}
+tr:nth-child(even){background:rgba(15,23,42,0.02)}
+
+/* Buttons & links */
+.btn{display:inline-block;padding:8px 14px;border-radius:10px;background:var(--primary);color:white;font-weight:700;text-decoration:none;transition:transform .14s ease,box-shadow .14s ease}
+.btn.secondary{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--muted-2)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(15,98,254,0.12)}
+
+/* Images and media */
+img{max-width:100%;height:auto;display:block}
+
+/* Footer */
+footer{margin-top:28px;text-align:center;font-size:0.95rem;color:var(--muted-2)}
+
+/* Small screens */
+@media (max-width:840px){
+    header{flex-direction:column;align-items:flex-start}
+    nav ul{flex-wrap:wrap}
+    #wrapper{margin:18px 12px;padding:20px}
 }
 
-.profile {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+@media (max-width:420px){
+    .brand{font-size:1rem}
+    nav a{padding:8px 10px;font-size:0.95rem}
 }
 
-.profile img {
-    width: 180px;
-    border-radius: 8px;
-}
+/* Accessibility focus state */
+:focus{outline:3px solid rgba(15,98,254,0.12);outline-offset:3px}
 
-footer {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 0.9em;
-    color: #666;
-}
+/* Utility spacing classes used by pages */
+.mb-8{margin-bottom:8px}
+.mb-16{margin-bottom:16px}
+.mt-16{margin-top:16px}
 
-/* Jello responsiveness */
-@media (max-width: 900px) {
-    #wrapper {
-        width: 95%;
-    }
-    .float-img {
-        float: none;
-        margin: 0 auto;
-        text-align: center;
-    }
+/* Small helper for team/rider images */
+.avatar{width:72px;height:72px;border-radius:10px;object-fit:cover}
+
+/* Subtle card hover for interactive lists */
+.card.interactive:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,0.08)}
+
+/* Dark-mode friendly preference (if user adds class or system prefers) */
+@media (prefers-color-scheme: dark){
+    :root{--bg:#081028;--card-bg:#07102a;--primary:#58a6ff;--accent:#9b8cff;--muted:#cbd5e1;--muted-2:#94a3b8}
+    body{background:linear-gradient(180deg,var(--bg), #07102a 120px);color:var(--muted)}
+    #wrapper{box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    table th, table td{border-bottom:1px solid rgba(255,255,255,0.04)}
 }
